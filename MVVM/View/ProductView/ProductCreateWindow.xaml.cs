@@ -23,7 +23,7 @@ namespace SoftTradeTEST.MVVM.View.ProductView
     /// </summary>
     public partial class ProductCreateWindow : Window
     {
-        private IUnit _unit = new Unit();
+        private IUnit _unit = new Unit(new DB.DbConnection());
         
         public ProductCreateWindow()
         {

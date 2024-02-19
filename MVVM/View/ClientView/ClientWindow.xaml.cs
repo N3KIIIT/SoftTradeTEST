@@ -24,7 +24,7 @@ namespace SoftTradeTEST.MVVM.View
     /// </summary>
     public partial class ClientWindow : Window
     {
-        private IUnit _unit = new Unit();
+        private IUnit _unit = new Unit(new DB.DbConnection());
         private Client _selectedClient { get; set; } = null;
         private ClientVM _selectedClientVM { get; set; } = null;
         public ClientWindow()

@@ -23,7 +23,7 @@ namespace SoftTradeTEST.MVVM.View.ClientView
     /// </summary>
     public partial class ClientEditWindow : Window
     {
-        private IUnit _unit = new Unit();
+        private IUnit _unit = new Unit(new DB.DbConnection());
         private Client _selectedClient = new Client();
         public ClientEditWindow()
         {

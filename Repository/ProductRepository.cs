@@ -7,11 +7,15 @@ namespace SoftTradeTEST.Repository
 {
     class ProductRepository : IProductRepository
     {
-        string connectionString = new DbConnection().Connection;
+        private readonly IDbConnection _dbConnection;
+        public ProductRepository(IDbConnection dbConnection) 
+        {
+            _dbConnection=dbConnection;
+        }
 
         public void Add(Product item)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_dbConnection.ConnectionString))
             {
                 var query = $"INSERT INTO [dbo].[Products]([Name],[Type],[Period]) VALUES ('{item.Name}',{(int)item.Type},{((int)item.Period)})";
                 connection.Open();
@@ -23,7 +27,7 @@ namespace SoftTradeTEST.Repository
         {
             Product product = new Product();
 
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_dbConnection.ConnectionString))
             {
                 var query = $"SELECT * FROM [dbo].[Products] WHERE [id] = {id}";
 
@@ -53,7 +57,7 @@ namespace SoftTradeTEST.Repository
         public IEnumerable<Product> GetAll()
         {
             var productList = new List<Product>();
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_dbConnection.ConnectionString))
             {
                 var query = $"SELECT * FROM [dbo].[Products]";
                 connection.Open();
@@ -83,7 +87,7 @@ namespace SoftTradeTEST.Repository
         }
         public void Remove(Product item)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_dbConnection.ConnectionString))
             {
                 var query = $"DELETE FROM [dbo].[Products] WHERE [Id] = {item.ProductId}";
                 SqlCommand command = new SqlCommand(query, connection);
@@ -95,7 +99,7 @@ namespace SoftTradeTEST.Repository
         {
             foreach (var manager in item)
             {
-                using (var connection = new SqlConnection(connectionString))
+                using (var connection = new SqlConnection(_dbConnection.ConnectionString))
                 {
                     var query = $"DELETE FROM [dbo].[dbo].[Products] WHERE [Id] = {manager.ProductId}";
                     SqlCommand command = new SqlCommand(query, connection);
@@ -107,7 +111,7 @@ namespace SoftTradeTEST.Repository
         }
         public void Update(Product item)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_dbConnection.ConnectionString))
             {
                 var query = $"UPDATE [dbo].[Products] SET [Name] = '{item.Name}' ,[Type] = {((int)item.Type)} ,[Period] = {((int)item.Period)} WHERE [Id] = {item.ProductId}";
                 SqlCommand command = new SqlCommand(query, connection);

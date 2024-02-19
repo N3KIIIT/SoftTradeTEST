@@ -4,6 +4,7 @@ using SoftTradeTEST.Repository;
 using SoftTradeTEST.Repository.IRepository;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace SoftTradeTEST.MVVM.View.ClientView
     public partial class ClientCreateWindow : Window
     {
 
-        private IUnit _unit = new Unit();
+        private IUnit _unit = new Unit(new DB.DbConnection());
         public ClientCreateWindow()
         {
             InitializeComponent();

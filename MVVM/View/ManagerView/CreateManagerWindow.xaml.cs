@@ -23,7 +23,7 @@ namespace SoftTradeTEST.MVVM.View.ManagerView
     /// </summary>
     public partial class CreateManagerWindow : Window
     {
-        private IUnit _unit = new Unit(); 
+        private IUnit _unit = new Unit(new DB.DbConnection()); 
         public CreateManagerWindow()
         {
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace SoftTradeTEST.MVVM.View.ManagerView
         {
             try 
             {
-                if (Name_textBox.Text == null)
+                if (Name_textBox.Text.IsNullOrEmpty())
                     throw new NullReferenceException();
 
                 Manager manager = new Manager()

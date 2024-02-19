@@ -14,12 +14,15 @@ namespace SoftTradeTEST.Repository
 {
     class ManagerRepository : IManagerRepository
     {
-
-        string connectionString = new DbConnection().Connection;
+        private readonly IDbConnection _dbConnection;
+        public ManagerRepository(IDbConnection dbConnection)
+        {
+            _dbConnection = dbConnection;
+        }
 
         public void Add(Manager item)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_dbConnection.ConnectionString))
             {
                 var query = $"INSERT INTO [dbo].[Managers]([Name]) VALUES('{item.Name}')";
                 connection.Open();
@@ -31,7 +34,7 @@ namespace SoftTradeTEST.Repository
         {
             Manager manager = new Manager();
 
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_dbConnection.ConnectionString))
             {
                 var query = $"SELECT * FROM [dbo].[Managers] WHERE [id] = {id}";
 
@@ -59,7 +62,7 @@ namespace SoftTradeTEST.Repository
         public IEnumerable<Manager> GetAll()
         {
             var managerList = new List<Manager>();
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_dbConnection.ConnectionString))
             {
                 var query = $"SELECT * FROM [dbo].[Managers]";
                 connection.Open();
@@ -88,7 +91,7 @@ namespace SoftTradeTEST.Repository
         }
         public void Remove(Manager item)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_dbConnection.ConnectionString))
             {
                 var query = $"DELETE FROM [dbo].[Managers] WHERE [Id] = {item.Id}";
                 SqlCommand command = new SqlCommand(query, connection);
@@ -100,7 +103,7 @@ namespace SoftTradeTEST.Repository
         {
             foreach (var manager in item)
             {
-                using (var connection = new SqlConnection(connectionString))
+                using (var connection = new SqlConnection(_dbConnection.ConnectionString))
                 {
                     var query = $"DELETE FROM [dbo].[Managers] WHERE [Id] = {manager.Id}";
                     SqlCommand command = new SqlCommand(query, connection);
@@ -112,7 +115,7 @@ namespace SoftTradeTEST.Repository
         }
         public void Update(Manager item)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_dbConnection.ConnectionString))
             {
                 var query = $"UPDATE [dbo].[Managers] SET [Name] = '{item.Name}' WHERE [Id] = {item.Id}";
                 SqlCommand command = new SqlCommand(query, connection);

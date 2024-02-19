@@ -24,7 +24,7 @@ namespace SoftTradeTEST.MVVM.View
     public partial class EditManagerWindow : Window
     {
         private Manager _selectedManager = new Manager();
-        private IUnit _unit = new Unit();
+        private IUnit _unit = new Unit(new DB.DbConnection());
         public EditManagerWindow()
         {
             InitializeComponent();
@@ -40,7 +40,7 @@ namespace SoftTradeTEST.MVVM.View
         {
             try
             {
-                if (Name_textBox.Text == null)
+                if (Name_textBox.Text.IsNullOrEmpty())
                     throw new NullReferenceException();
 
                 _selectedManager.Name = Name_textBox.Text;

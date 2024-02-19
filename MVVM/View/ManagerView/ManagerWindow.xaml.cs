@@ -22,7 +22,7 @@ namespace SoftTradeTEST.MVVM.View.ManagerView
     /// </summary>
     public partial class ManagerWindow : Window
     {
-         private IUnit _unit = new Unit();
+         private IUnit _unit = new Unit(new DB.DbConnection());
         private Manager _selectedManager { get; set; } = null;
 
         public ManagerWindow()

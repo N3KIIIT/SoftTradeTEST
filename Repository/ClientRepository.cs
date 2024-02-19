@@ -10,11 +10,15 @@ namespace SoftTradeTEST.Repository
 {
     class ClientRepository : IClientRepository
     {
-        string connectionString = new DbConnection().Connection;
+        private readonly IDbConnection _dbConnection;
+        public ClientRepository(IDbConnection dbConnection)
+        {
+            _dbConnection = dbConnection;
+        }
 
         public void Add(Client item)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_dbConnection.ConnectionString))
             {
                 var query = $"INSERT INTO [dbo].[Clients]([Name],[StatusId],[ManagerId],[ProductId])VALUES('{item.Name}',{item.Status},{item.Manager},{item.Products})";
                 connection.Open();
@@ -26,7 +30,7 @@ namespace SoftTradeTEST.Repository
         {
             Client client = new Client();
 
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_dbConnection.ConnectionString))
             {
                 var query = $"SELECT * FROM [dbo].[Clients] WHERE [id] = {id}";
 
@@ -58,7 +62,7 @@ namespace SoftTradeTEST.Repository
         public IEnumerable<Client> GetAll()
         {
             var clientList = new List<Client>();
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_dbConnection.ConnectionString))
             {
                 var query = $"SELECT * FROM [dbo].[Clients]";
                 connection.Open();
@@ -91,7 +95,7 @@ namespace SoftTradeTEST.Repository
         }
         public void Remove(Client item)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_dbConnection.ConnectionString))
             {
                 var query = $"DELETE FROM [dbo].[Clients] WHERE [Id] = {item.Id}";
                 SqlCommand command = new SqlCommand(query, connection);
@@ -103,7 +107,7 @@ namespace SoftTradeTEST.Repository
         {
             foreach (var manager in item)
             {
-                using (var connection = new SqlConnection(connectionString))
+                using (var connection = new SqlConnection(_dbConnection.ConnectionString))
                 {
                     var query = $"DELETE FROM [dbo].[dbo].[Clients] WHERE [Id] = {manager.Id}";
                     SqlCommand command = new SqlCommand(query, connection);
@@ -115,7 +119,7 @@ namespace SoftTradeTEST.Repository
         }
         public void Update(Client item)
         {
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_dbConnection.ConnectionString))
             {
                 var query = $"UPDATE [dbo].[Clients] SET [Name] = '{item.Name}' ,[StatusId] = {item.Status} ,[ManagerId] = {item.Manager},[ProductId] = {item.Products} WHERE [Id] = {item.Id}";
                 SqlCommand command = new SqlCommand(query, connection);
