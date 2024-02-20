@@ -1,19 +1,10 @@
 ﻿using SoftTradeTEST.Models;
 using SoftTradeTEST.Repository.IRepository;
 using SoftTradeTEST.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using SoftTradeTEST.AppDbConetext;
+
 
 namespace SoftTradeTEST.MVVM.View.ProductView
 {
@@ -22,7 +13,7 @@ namespace SoftTradeTEST.MVVM.View.ProductView
     /// </summary>
     public partial class ProductWindow : Window
     {
-        private IUnit _unit = new Unit(new DB.DbConnection());
+        private readonly IUnit _unit = new Unit(new AppDbConetext.Context());
         private Product _selectedProduct { get; set; }
         public ProductWindow()
         {
@@ -63,8 +54,10 @@ namespace SoftTradeTEST.MVVM.View.ProductView
 
                 MessageBoxResult result = MessageBox.Show("Вы уверены", "Подтвердить", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
+                {
                     _unit.Product.Remove(_selectedProduct);
-
+                    _unit.Save();
+                }
                 RefreshDataGridView();
             }
             catch (NullReferenceException)

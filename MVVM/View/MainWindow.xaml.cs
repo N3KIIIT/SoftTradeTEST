@@ -1,4 +1,4 @@
-﻿using SoftTradeTEST.DB;
+﻿
 using SoftTradeTEST.Models;
 using System.Windows;
 using SoftTradeTEST.Models.Enum;
@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using SoftTradeTEST.MVVM.View;
 using SoftTradeTEST.MVVM.View.ManagerView;
 using SoftTradeTEST.MVVM.View.ProductView;
+using SoftTradeTEST.AppDbConetext;
 
 namespace SoftTradeTEST
 {
@@ -19,9 +20,10 @@ namespace SoftTradeTEST
     /// </summary>
     public partial class MainWindow : Window
     {
+       
         public MainWindow()
-        { 
-            InitializeComponent();
+        {
+            InitializeComponent();       
         }
 
         private void Managers_button_Click(object sender, RoutedEventArgs e)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SoftTradeTEST.Models.Enum
 {
-    internal enum SubscriptionPeriod
+    public enum SubscriptionPeriod
     {
         Month = 1,
         Quarter = 2,

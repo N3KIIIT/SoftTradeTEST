@@ -1,7 +1,7 @@
 ﻿
 namespace SoftTradeTEST.Models.Enum
 {
-    internal enum Type
+    public enum Type
     {
         Permanent = 1,
         Subscription = 2

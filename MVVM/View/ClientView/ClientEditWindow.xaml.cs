@@ -23,7 +23,7 @@ namespace SoftTradeTEST.MVVM.View.ClientView
     /// </summary>
     public partial class ClientEditWindow : Window
     {
-        private IUnit _unit = new Unit(new DB.DbConnection());
+        private IUnit _unit = new Unit(new AppDbConetext.Context());
         private Client _selectedClient = new Client();
         public ClientEditWindow()
         {
@@ -33,7 +33,7 @@ namespace SoftTradeTEST.MVVM.View.ClientView
         {
             InitializeComponent();
 
-            _selectedClient = _unit.Client.Get(id);
+            _selectedClient = _unit.Client.Get(o=>o.Id==id);
 
             Status_comboBox.ItemsSource = _unit.ClientStatus.GetAll();
             Manager_comboBox.ItemsSource = _unit.Manager.GetAll();
@@ -55,15 +55,16 @@ namespace SoftTradeTEST.MVVM.View.ClientView
                     throw new NullReferenceException();
 
                 _selectedClient.Name = Name_textBox.Text;
-                _selectedClient.Status = ((ClientStatus)Status_comboBox.SelectedValue).Id.ToString();
+                _selectedClient.Status = ((ClientStatus)Status_comboBox.SelectedValue);
                 if ((((Manager)Manager_comboBox.SelectedValue) != null))    
-                    _selectedClient.Manager = ((Manager)Manager_comboBox.SelectedValue).Id.ToString();
+                    _selectedClient.Manager = ((Manager)Manager_comboBox.SelectedValue);
 
                 
                 if ((((Product)Product_comboBox.SelectedValue) != null))    
-                _selectedClient.Products = ((Product)Product_comboBox.SelectedValue).ProductId.ToString();
+                _selectedClient.Products = ((Product)Product_comboBox.SelectedValue);
 
                 _unit.Client.Update(_selectedClient);
+                _unit.Save();
                 this.Close();
 
             }

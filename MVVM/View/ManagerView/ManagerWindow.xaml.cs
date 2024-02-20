@@ -22,11 +22,13 @@ namespace SoftTradeTEST.MVVM.View.ManagerView
     /// </summary>
     public partial class ManagerWindow : Window
     {
-         private IUnit _unit = new Unit(new DB.DbConnection());
+         private IUnit _unit = new Unit(new AppDbConetext.Context());
+
         private Manager _selectedManager { get; set; } = null;
 
         public ManagerWindow()
         {
+            
             InitializeComponent();
             RefreshDataGridView();
         }
@@ -61,8 +63,11 @@ namespace SoftTradeTEST.MVVM.View.ManagerView
                     throw new NullReferenceException();
 
             MessageBoxResult result = MessageBox.Show("Вы уверены", "Подтвердить", MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.Yes) 
-                _unit.Manager.Remove(_selectedManager);
+                if (result == MessageBoxResult.Yes)
+                {
+                    _unit.Manager.Remove(_selectedManager);
+                    _unit.Save();
+                }
 
                 RefreshDataGridView();
             }
@@ -75,7 +80,7 @@ namespace SoftTradeTEST.MVVM.View.ManagerView
         }
         private void RefreshDataGridView()
         {
-            DataGrid.ItemsSource = _unit.Manager.GetAll();
+            DataGrid.ItemsSource = _unit.Manager.GetAll().ToList();
             _selectedManager = null;
         }
 

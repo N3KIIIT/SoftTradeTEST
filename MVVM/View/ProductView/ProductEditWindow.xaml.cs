@@ -23,17 +23,16 @@ namespace SoftTradeTEST.MVVM.View.ProductView
     /// </summary>
     public partial class ProductEditWindow : Window
     {
-        private IUnit _unit = new Unit(new DB.DbConnection());
+        private IUnit _unit = new Unit(new AppDbConetext.Context());
         private Product _selectedProduct = new Product();
         public ProductEditWindow()
         {
             InitializeComponent();
-            
         }
         public ProductEditWindow(int id)
         {
             InitializeComponent();
-            _selectedProduct = _unit.Product.Get(id);
+            _selectedProduct = _unit.Product.Get(o=>o.ProductId==id);
 
             Name_textBox.Text = _selectedProduct.Name;
 
@@ -69,6 +68,7 @@ namespace SoftTradeTEST.MVVM.View.ProductView
                     _selectedProduct.Type = Models.Enum.Type.Permanent;
                     _selectedProduct.Period = 0;
                     _unit.Product.Update(_selectedProduct);
+                    _unit.Save();
                     this.Close();
                 }
                 if (!Name_textBox.Text.IsNullOrEmpty() && (Models.Enum.Type)Type_comboBox.SelectedValue == Models.Enum.Type.Subscription)
@@ -77,6 +77,7 @@ namespace SoftTradeTEST.MVVM.View.ProductView
                     _selectedProduct.Type = Models.Enum.Type.Subscription;
                     _selectedProduct.Period = (Models.Enum.SubscriptionPeriod)Period_comboBox.SelectedValue;
                     _unit.Product.Update(_selectedProduct);
+                    _unit.Save();
                     this.Close();
                 }
             }

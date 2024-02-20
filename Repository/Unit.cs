@@ -1,24 +1,30 @@
-﻿using SoftTradeTEST.DB;
+﻿using SoftTradeTEST.AppDbConetext;
 using SoftTradeTEST.Repository.IRepository;
 
 
 namespace SoftTradeTEST.Repository
 {
-    class Unit : IUnit
+    public class Unit : IUnit
     {
-        private readonly IDbConnection _dbConnection;
+        private Context _dbContext;
         public IProductRepository Product { get; private set; }
         public IClientRepository Client { get; private set; }  
         public IManagerRepository Manager { get; private set; }
         public IClientStatusRepository ClientStatus { get; private set; }
 
-        public Unit(IDbConnection dbConnection)
+        public Unit(Context dbContext)
         {
-            _dbConnection = dbConnection;
-            Product = new ProductRepository(_dbConnection);
-            Client = new ClientRepository(_dbConnection);
-            Manager = new ManagerRepository(_dbConnection);
-            ClientStatus = new ClientStatusRepository(_dbConnection);
+            _dbContext = dbContext;
+
+            Product = new ProductRepository(_dbContext);
+            Client = new ClientRepository(_dbContext);
+            Manager = new ManagerRepository(_dbContext);
+            ClientStatus = new ClientStatusRepository(_dbContext);
+        }
+
+        public void Save()
+        {
+            _dbContext.SaveChanges();
         }
     }
 }

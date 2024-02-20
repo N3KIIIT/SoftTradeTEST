@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace SoftTradeTEST.Repository.IRepository
 {
-    interface IUnit
+    public interface IUnit
     {
         IProductRepository Product { get; }
         IClientRepository Client { get; }
         IManagerRepository Manager { get; }
         IClientStatusRepository ClientStatus { get; }
+
+        void Save();
     }
 }

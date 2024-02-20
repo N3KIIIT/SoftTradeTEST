@@ -24,15 +24,18 @@ namespace SoftTradeTEST.MVVM.View
     public partial class EditManagerWindow : Window
     {
         private Manager _selectedManager = new Manager();
-        private IUnit _unit = new Unit(new DB.DbConnection());
+        private IUnit _unit = new Unit(new AppDbConetext.Context());
         public EditManagerWindow()
         {
             InitializeComponent();
+            
         }
         public EditManagerWindow(int id)
         {
             InitializeComponent();
-            _selectedManager = _unit.Manager.Get(id);
+
+                Manager manager = _unit.Manager.Get(o=>o.Id==id);
+            _selectedManager = manager;
             Name_textBox.Text = _selectedManager.Name;
         }
 
@@ -45,6 +48,7 @@ namespace SoftTradeTEST.MVVM.View
 
                 _selectedManager.Name = Name_textBox.Text;
                 _unit.Manager.Update(_selectedManager);
+                _unit.Save();
                 this.Close();
 
             }

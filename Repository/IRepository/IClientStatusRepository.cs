@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SoftTradeTEST.Repository.IRepository
 {
-    interface IClientStatusRepository : IRepository<ClientStatus>
+    public interface IClientStatusRepository : IRepository<ClientStatus>
     {
         void Update(ClientStatus item);
     }

@@ -23,11 +23,12 @@ namespace SoftTradeTEST.MVVM.View.ProductView
     /// </summary>
     public partial class ProductCreateWindow : Window
     {
-        private IUnit _unit = new Unit(new DB.DbConnection());
+        private IUnit _unit = new Unit(new AppDbConetext.Context());
         
         public ProductCreateWindow()
         {
             InitializeComponent();
+
             Type_comboBox.ItemsSource = new object[]
             {
                 Models.Enum.Type.Subscription,
@@ -56,6 +57,7 @@ namespace SoftTradeTEST.MVVM.View.ProductView
                     product.Type = Models.Enum.Type.Permanent;
                     
                     _unit.Product.Add(product);
+                    _unit.Save();
                     this.Close();
                 }
                 if (!Name_textBox.Text.IsNullOrEmpty() && (Models.Enum.Type)Type_comboBox.SelectedValue == Models.Enum.Type.Subscription)
@@ -64,6 +66,7 @@ namespace SoftTradeTEST.MVVM.View.ProductView
                     product.Type = Models.Enum.Type.Subscription;
                     product.Period = (Models.Enum.SubscriptionPeriod)Period_comboBox.SelectedValue;
                     _unit.Product.Add(product);
+                    _unit.Save(); 
                     this.Close();
                 }
             }

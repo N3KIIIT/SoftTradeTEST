@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SoftTradeTEST.Models
 {
-    internal class Manager
+    public class Manager
     {
         public int Id { get; set; }
         public string Name { get; set; }

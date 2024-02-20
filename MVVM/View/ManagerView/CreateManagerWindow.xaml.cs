@@ -23,7 +23,7 @@ namespace SoftTradeTEST.MVVM.View.ManagerView
     /// </summary>
     public partial class CreateManagerWindow : Window
     {
-        private IUnit _unit = new Unit(new DB.DbConnection()); 
+        private IUnit _unit= new Unit(new AppDbConetext.Context()); 
         public CreateManagerWindow()
         {
             InitializeComponent();
@@ -40,6 +40,7 @@ namespace SoftTradeTEST.MVVM.View.ManagerView
                     Name = Name_textBox.Text
                 };
                 _unit.Manager.Add(manager);
+                _unit.Save();
                 this.Close();
 
             }

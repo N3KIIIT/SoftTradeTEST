@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using SoftTradeTEST.Repository.IRepository;
+using System.Configuration;
 using System.Data;
 using System.Windows;
 
@@ -9,7 +10,7 @@ namespace SoftTradeTEST
     /// </summary>
     public partial class App : Application
     {
-
+      
     }
 
 }

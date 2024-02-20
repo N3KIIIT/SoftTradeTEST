@@ -24,11 +24,11 @@ namespace SoftTradeTEST.MVVM.View.ClientView
     /// </summary>
     public partial class ClientCreateWindow : Window
     {
-
-        private IUnit _unit = new Unit(new DB.DbConnection());
+        private IUnit _unit = new Unit(new AppDbConetext.Context());
         public ClientCreateWindow()
         {
             InitializeComponent();
+            
 
             Status_comboBox.ItemsSource = _unit.ClientStatus.GetAll();
             Manager_comboBox.ItemsSource = _unit.Manager.GetAll();
@@ -48,18 +48,19 @@ namespace SoftTradeTEST.MVVM.View.ClientView
 
 
                 client.Name = Name_textBox.Text;
-                client.Status = ((ClientStatus)Status_comboBox.SelectedValue).Id.ToString();
+                client.Status = ((ClientStatus)Status_comboBox.SelectedValue);
                 if ((((Manager)Manager_comboBox.SelectedValue) != null))
-                    client.Manager = (((Manager)Manager_comboBox.SelectedValue).Id).ToString();
+                    client.Manager = (((Manager)Manager_comboBox.SelectedValue));
                 else
                     client.Manager = null!;
 
                 if ((((Product)Product_comboBox.SelectedValue) != null))
-                    client.Products = ((Product)Product_comboBox.SelectedValue).ProductId.ToString();
+                    client.Products = ((Product)Product_comboBox.SelectedValue);
                 else
                     client.Products = null!; 
 
                 _unit.Client.Add(client);
+                _unit.Save();
                 this.Close();
 
             }

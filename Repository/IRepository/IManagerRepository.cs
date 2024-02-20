@@ -3,8 +3,9 @@
 
 namespace SoftTradeTEST.Repository.IRepository
 {
-    interface IManagerRepository : IRepository<Manager>
+    public interface IManagerRepository : IRepository<Manager>
     {
         void Update(Manager item);
+        Manager GetWithId(int id);
     }
 }

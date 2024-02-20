@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SoftTradeTEST.Models
 {
-    internal class ClientStatus
+    public class ClientStatus
     {
         public int Id { get; set; }
         public string Status { get; set; }

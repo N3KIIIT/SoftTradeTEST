@@ -24,9 +24,10 @@ namespace SoftTradeTEST.MVVM.View
     /// </summary>
     public partial class ClientWindow : Window
     {
-        private IUnit _unit = new Unit(new DB.DbConnection());
+
+        private IUnit _unit = new Unit(new AppDbConetext.Context());
+
         private Client _selectedClient { get; set; } = null;
-        private ClientVM _selectedClientVM { get; set; } = null;
         public ClientWindow()
         {
             InitializeComponent();
@@ -62,15 +63,17 @@ namespace SoftTradeTEST.MVVM.View
         {
             try
             {
-            if (_selectedClient == null)
-                throw new NullReferenceException();
+                if (_selectedClient == null)
+                    throw new NullReferenceException();
 
 
-            MessageBoxResult result = MessageBox.Show("Вы уверены", "Подтвердить", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-                _unit.Client.Remove(_selectedClient);
-
-            RefreshDataGridView();
+                MessageBoxResult result = MessageBox.Show("Вы уверены", "Подтвердить", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    _unit.Client.Remove(_selectedClient);
+                    _unit.Save();
+                }
+                RefreshDataGridView();
             }
             catch (NullReferenceException)
             {
@@ -79,35 +82,18 @@ namespace SoftTradeTEST.MVVM.View
         }
         private void DataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            _selectedClientVM = ((ClientVM)DataGrid.SelectedValue);
-            if(_selectedClientVM != null)
-            _selectedClient =(_unit.Client.Get(_selectedClientVM.Id));
+            _selectedClient = ((Client)DataGrid.SelectedValue);
+            if (_selectedClient != null)
+                _selectedClient = (_unit.Client.Get(o => o.Id == _selectedClient.Id));
         }
         private void RefreshDataGridView()
         {
-        List<ClientVM> _clientVmList = new List<ClientVM>();
+            var clientList = new List<Client>();
 
-            foreach (var item in _unit.Client.GetAll())
-            {
-                var clientVM = new ClientVM();
+            clientList.AddRange(_unit.Client.GetAll());
 
-                clientVM.Id = item.Id;
-                clientVM.Name = item.Name;
-                clientVM.Status = (from Status in _unit.ClientStatus.GetAll()
-                                                 where Status.Id.ToString() == item.Status
-                                                 select (Status)).FirstOrDefault();
-                clientVM.Manager = (from Manager in _unit.Manager.GetAll()
-                                             where Manager.Id.ToString() == item.Manager
-                                             select (Manager)).FirstOrDefault();
-                clientVM.Products = (from Product in _unit.Product.GetAll()
-                                              where Product.ProductId.ToString() == item.Products
-                                              select Product).FirstOrDefault();
-
-                _clientVmList.Add(clientVM);
-            }
-            DataGrid.ItemsSource = _clientVmList;
+            DataGrid.ItemsSource = clientList;
             _selectedClient = null;
-            _selectedClientVM = null;
         }
         private void Refresh_button_Click(object sender, RoutedEventArgs e)
         {
@@ -120,30 +106,12 @@ namespace SoftTradeTEST.MVVM.View
                 if (Status_comboBox.SelectedValue == null)
                     throw new NullReferenceException();
 
+                var clientList = new List<Client>();
 
-                List<ClientVM> _clientVmList = new List<ClientVM>();
+                clientList.AddRange(_unit.Client.GetAll().Where(o => o.Status == Status_comboBox.SelectedValue));
 
-                foreach (var item in _unit.Client.GetAll().Where(o => o.Status == ((ClientStatus)Status_comboBox.SelectedValue).Id.ToString()))
-                {
-                    var clientVM = new ClientVM();
-
-                    clientVM.Id = item.Id;
-                    clientVM.Name = item.Name;
-                    clientVM.Status = (from Status in _unit.ClientStatus.GetAll()
-                                       where Status.Id.ToString() == item.Status
-                                       select (Status)).FirstOrDefault();
-                    clientVM.Manager = (from Manager in _unit.Manager.GetAll()
-                                        where Manager.Id.ToString() == item.Manager
-                                        select (Manager)).FirstOrDefault();
-                    clientVM.Products = (from Product in _unit.Product.GetAll()
-                                         where Product.ProductId.ToString() == item.Products
-                                         select Product).FirstOrDefault();
-
-                    _clientVmList.Add(clientVM);
-                }
-                DataGrid.ItemsSource = _clientVmList;
+                DataGrid.ItemsSource = clientList;
                 _selectedClient = null;
-                _selectedClientVM = null;
             }
             catch (NullReferenceException)
             {
@@ -156,29 +124,13 @@ namespace SoftTradeTEST.MVVM.View
             {
                 if (Manager_comboBox.SelectedValue == null)
                     throw new NullReferenceException();
-                List<ClientVM> _clientVmList = new List<ClientVM>();
+                var clientList = new List<Client>();
 
-                foreach (var item in _unit.Client.GetAll().Where(o => o.Manager == ((Manager)Manager_comboBox.SelectedValue).Id.ToString()))
-                {
-                    var clientVM = new ClientVM();
+                clientList.AddRange(_unit.Client.GetAll().Where(o => o.Manager == Manager_comboBox.SelectedValue));
 
-                    clientVM.Id = item.Id;
-                    clientVM.Name = item.Name;
-                    clientVM.Status = (from Status in _unit.ClientStatus.GetAll()
-                                       where Status.Id.ToString() == item.Status
-                                       select (Status)).FirstOrDefault();
-                    clientVM.Manager = (from Manager in _unit.Manager.GetAll()
-                                        where Manager.Id.ToString() == item.Manager
-                                        select (Manager)).FirstOrDefault();
-                    clientVM.Products = (from Product in _unit.Product.GetAll()
-                                         where Product.ProductId.ToString() == item.Products
-                                         select Product).FirstOrDefault();
-
-                    _clientVmList.Add(clientVM);
-                }
-                DataGrid.ItemsSource = _clientVmList;
+                DataGrid.ItemsSource = clientList;
                 _selectedClient = null;
-                _selectedClientVM = null;
+
             }
             catch (NullReferenceException)
             {
@@ -192,29 +144,13 @@ namespace SoftTradeTEST.MVVM.View
                 if (Product_comboBox.SelectedValue == null)
                     throw new NullReferenceException();
 
-                List<ClientVM> _clientVmList = new List<ClientVM>();
+                var clientList = new List<Client>();
 
-                foreach (var item in _unit.Client.GetAll().Where(o => o.Products == ((Product)Product_comboBox.SelectedValue).ProductId.ToString()))
-                {
-                    var clientVM = new ClientVM();
+                clientList.AddRange(_unit.Client.GetAll().Where(o => o.Products == Product_comboBox.SelectedValue));
 
-                    clientVM.Id = item.Id;
-                    clientVM.Name = item.Name;
-                    clientVM.Status = (from Status in _unit.ClientStatus.GetAll()
-                                       where Status.Id.ToString() == item.Status
-                                       select (Status)).FirstOrDefault();
-                    clientVM.Manager = (from Manager in _unit.Manager.GetAll()
-                                        where Manager.Id.ToString() == item.Manager
-                                        select (Manager)).FirstOrDefault();
-                    clientVM.Products = (from Product in _unit.Product.GetAll()
-                                         where Product.ProductId.ToString() == item.Products
-                                         select Product).FirstOrDefault();
-
-                    _clientVmList.Add(clientVM);
-                }
-                DataGrid.ItemsSource = _clientVmList;
+                DataGrid.ItemsSource = clientList;
                 _selectedClient = null;
-                _selectedClientVM = null;
+
             }
             catch (NullReferenceException)
             {
