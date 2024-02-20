@@ -112,6 +112,7 @@ namespace SoftTradeTEST.MVVM.View
 
                 DataGrid.ItemsSource = clientList;
                 _selectedClient = null;
+
             }
             catch (NullReferenceException)
             {
