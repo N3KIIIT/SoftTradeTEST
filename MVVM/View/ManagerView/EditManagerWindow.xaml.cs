@@ -24,15 +24,12 @@ namespace SoftTradeTEST.MVVM.View
     /// </summary>
     public partial class EditManagerWindow : Window
     {
-        private IUnit _unit = new Unit(new DB.DbConnection());
         public EditManagerWindow(int id)
         {
             InitializeComponent();
 
             EditManagerViewModel editManagerWindow = new EditManagerViewModel(id);
             this.DataContext = editManagerWindow;
-
-            Name_textBox.Text = _unit.Manager.Get(id).Name;
         }
 
         private void Cancel_button_Click(object sender, RoutedEventArgs e)

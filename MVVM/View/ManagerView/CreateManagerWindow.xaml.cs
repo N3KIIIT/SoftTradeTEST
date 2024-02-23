@@ -24,7 +24,6 @@ namespace SoftTradeTEST.MVVM.View.ManagerView
     /// </summary>
     public partial class CreateManagerWindow : Window
     {
-        private IUnit _unit = new Unit(new DB.DbConnection()); 
         public CreateManagerWindow()
         {
             InitializeComponent();

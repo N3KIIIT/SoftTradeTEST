@@ -15,7 +15,6 @@ namespace SoftTradeTEST.MVVM.View.ManagerView
     public partial class ManagerWindow : Window
     {
          private IUnit _unit = new Unit(new DB.DbConnection());
-        private Manager _selectedManager { get; set; } = null;
 
         public ManagerWindow()
         {
@@ -28,7 +27,6 @@ namespace SoftTradeTEST.MVVM.View.ManagerView
         private void RefreshDataGridView()
         {
             DataGrid.ItemsSource = _unit.Manager.GetAll();
-            _selectedManager = null;
         }
 
         private void Refresh_button_Click(object sender, RoutedEventArgs e)

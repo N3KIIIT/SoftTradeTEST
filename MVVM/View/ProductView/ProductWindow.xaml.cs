@@ -13,7 +13,6 @@ namespace SoftTradeTEST.MVVM.View.ProductView
     public partial class ProductWindow : Window
     {
         private IUnit _unit = new Unit(new DB.DbConnection());
-        private Product _selectedProduct { get; set; }
         public ProductWindow()
         {
             InitializeComponent();
@@ -32,7 +31,6 @@ namespace SoftTradeTEST.MVVM.View.ProductView
         private void RefreshDataGridView()
         {
             DataGrid.ItemsSource = _unit.Product.GetAll();
-            _selectedProduct = null;
         }
 
         private void Refresh_button_Click(object sender, RoutedEventArgs e)
