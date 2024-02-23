@@ -32,7 +32,8 @@
         DockPanel.Dock="Top">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="73*"/>
+                    <ColumnDefinition Width="613*"/>
                     <ColumnDefinition Width="100
                                   "/>
 
@@ -41,13 +42,13 @@
                        Foreground="LightGray"
                        FontSize="17"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       Margin="100,0,0,0"></TextBlock>
+                       HorizontalAlignment="Left"
+                       Margin="283,0,0,0" Grid.Column="1"></TextBlock>
                 <StackPanel
-                Grid.Column="1"
+                Grid.Column="2"
                 Orientation="Horizontal"
-                HorizontalAlignment="Right"
-                Margin="0,0,4,0">
+                HorizontalAlignment="Left"
+                Margin="96,0,0,0">
                 </StackPanel>
             </Grid>
         </Border>
@@ -60,11 +61,12 @@
 
 
         </Border >
-        <DataGrid x:Name="DataGrid" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" DockPanel.Dock="Top" Height="281" Width="676" Background="#FF252525" 
-              IsReadOnly="True" SelectedCellsChanged="DataGrid_SelectedCellsChanged"/>
-        <Button x:Name="Create_button" Content="Create" Width="134" Height="38" HorizontalAlignment="Left" Margin="5,0,0,0" Click="Create_button_Click"/>
-        <Button x:Name="Edit_button" Content="Edit" Width="134" Height="38" HorizontalAlignment="Right" Margin="225,0,5,0" Click="Edit_button_Click"/>
-        <Button x:Name="Delete_button" Content="Delete" Width="134" Height="38" HorizontalAlignment="Right" Margin="5,0,5,0" Click="Delete_button_Click"/>
+        <DataGrid x:Name="DataGrid" ItemsSource="{Binding Managers}" SelectedItem="{Binding SelectedManager}" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" DockPanel.Dock="Top" Height="281" Width="676" Background="#FF252525" 
+              IsReadOnly="True" ColumnWidth="*"/>
+
+        <Button x:Name="Create_button" Command="{Binding CreateManagerWindowCommand}" Content="Create" Width="134" Height="38" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+        <Button x:Name="Edit_button" Command="{Binding EditManagerWindowCommand}" Content="Edit" Width="134" Height="38" HorizontalAlignment="Right" Margin="225,0,5,0"/>
+        <Button x:Name="Delete_button" Command="{Binding DeleteManagerCommand}" Content="Delete" Width="134" Height="38" HorizontalAlignment="Right" Margin="5,0,5,0"/>
 
     </DockPanel>
 

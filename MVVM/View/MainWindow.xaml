@@ -58,19 +58,19 @@
 
 
             <StackPanel>
-                <Button x:Name="Products_button" Content="Products"
+                <Button x:Name="Products_button" Content="Products" Command="{Binding ShowProductWindowCommand}"
                              FontSize="16"
-                             FontWeight="Normal" Margin="0,10,0,10" Height="35" Click="Products_button_Click"
+                             FontWeight="Normal" Margin="0,10,0,10" Height="35"
                             />
 
-                <Button x:Name="Clients__button" Content="Clients"
+                <Button x:Name="Clients__button" Content="Clients" Command="{Binding ShowClientWindowCommand}"
              FontSize="16"
-             FontWeight="Normal" Margin="0,10,0,10" Height="35" Click="Clients__button_Click"
+             FontWeight="Normal" Margin="0,10,0,10" Height="35"
             />
 
-                <Button x:Name="Managers_button" Content="Managers"
+                <Button x:Name="Managers_button" Content="Managers" Command="{Binding ShowManagerWindowCommand}"
              FontSize="16"
-             FontWeight="Normal" Margin="0,10,0,10" Height="35" Click="Managers_button_Click"
+             FontWeight="Normal" Margin="0,10,0,10" Height="35"
               />
             </StackPanel>
 

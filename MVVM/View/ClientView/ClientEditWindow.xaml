@@ -34,15 +34,15 @@ ResizeMode="CanResize">
             <ColumnDefinition Width="203*"/>
         </Grid.ColumnDefinitions>
         <Label x:Name="Name_label" Content="Name:*" HorizontalAlignment="Left" Margin="27,74,0,0" VerticalAlignment="Top" Foreground="#FFE8E8E8" FontSize="24"/>
-        <TextBox x:Name="Name_textBox" HorizontalAlignment="Left" Margin="116,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" FontSize="24" Background="#FF616161" Foreground="White" Grid.ColumnSpan="2"/>
-        <Button x:Name="Edit_button" Content="Update" Click="Edit_button_Click" Margin="37,25,33,48" FontSize="24" Grid.Row="1"/>
+        <TextBox x:Name="Name_textBox" Text="{Binding Name}" HorizontalAlignment="Left" Margin="116,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" FontSize="24" Background="#FF616161" Foreground="White" Grid.ColumnSpan="2"/>
+        <Button x:Name="Edit_button" Command="{Binding EditClientCommand}" Content="Update" Margin="37,25,33,48" FontSize="24" Grid.Row="1"/>
         <Button x:Name="Cancel_button" Content="Cancel" Click="Cancel_button_Click" Margin="223,25,50,48" FontSize="24" Grid.ColumnSpan="2" Grid.Row="1"/>
-        <ComboBox x:Name="Status_comboBox" HorizontalAlignment="Left" Margin="116,135,0,0" VerticalAlignment="Top" Width="270" Height="34" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="Status_comboBox" SelectedValue="{Binding Status}" HorizontalAlignment="Left" Margin="116,135,0,0" VerticalAlignment="Top" Width="270" Height="34" Grid.ColumnSpan="2"/>
         <Label x:Name="Status_label" Content="Status:*" HorizontalAlignment="Left" Margin="26,127,0,0" VerticalAlignment="Top" Foreground="#FFE8E8E8" FontSize="24"/>
-        <ComboBox x:Name="Manager_comboBox" HorizontalAlignment="Left" Margin="116,189,0,0" VerticalAlignment="Top" Width="270" Height="34" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="Manager_comboBox" SelectedValue="{Binding Manager}" HorizontalAlignment="Left" Margin="116,189,0,0" VerticalAlignment="Top" Width="270" Height="34" Grid.ColumnSpan="2"/>
         <Label x:Name="Manager_label" Content="Manager:*" HorizontalAlignment="Left" Margin="0,185,0,0" VerticalAlignment="Top" Foreground="#FFE8E8E8" FontSize="24" RenderTransformOrigin="0.492,0.668"/>
         <Label x:Name="Product_label" Content="Product:*" HorizontalAlignment="Left" Margin="7,238,0,0" VerticalAlignment="Top" Foreground="#FFE8E8E8" FontSize="24" RenderTransformOrigin="0.492,0.668"/>
-        <ComboBox x:Name="Product_comboBox" HorizontalAlignment="Left" Margin="116,242,0,0" VerticalAlignment="Top" Width="270" Height="34" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="Product_comboBox" SelectedValue="{Binding Product}" HorizontalAlignment="Left" Margin="116,242,0,0" VerticalAlignment="Top" Width="270" Height="34" Grid.ColumnSpan="2"/>
         <Label x:Name="lable" Content="'*' - обязательные поля" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
         <Label Content="Edit Client" HorizontalAlignment="Left" Margin="160,27,0,0" VerticalAlignment="Top" Foreground="White" FontSize="30" Grid.ColumnSpan="2"/>
     </Grid>

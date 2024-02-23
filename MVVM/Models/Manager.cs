@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoftTradeTEST.Models.VM
+namespace SoftTradeTEST.MVVM.Models
+
 {
-    class ClientVM
+    internal class Manager
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ClientStatus Status { get; set; }
-        public Manager Manager { get; set; }
-        public Product Products { get; set; }
+        public override string ToString()
+        {
+            return  $"{Id}-{Name}";
+        }
     }
 }

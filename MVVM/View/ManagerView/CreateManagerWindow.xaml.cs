@@ -1,5 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using SoftTradeTEST.Models;
+using SoftTradeTEST.MVVM.Models;
+using SoftTradeTEST.MVVM.ViewModel.ManagerVM;
 using SoftTradeTEST.Repository;
 using SoftTradeTEST.Repository.IRepository;
 using System;
@@ -27,29 +28,9 @@ namespace SoftTradeTEST.MVVM.View.ManagerView
         public CreateManagerWindow()
         {
             InitializeComponent();
+            CreateManagerViewModel createManagerViewModel = new CreateManagerViewModel();
+            this.DataContext = createManagerViewModel;
         }
-        private void Create_button_Click(object sender, RoutedEventArgs e)
-        {
-            try 
-            {
-                if (Name_textBox.Text.IsNullOrEmpty())
-                    throw new NullReferenceException();
-
-                Manager manager = new Manager()
-                {
-                    Name = Name_textBox.Text
-                };
-                _unit.Manager.Add(manager);
-                this.Close();
-
-            }
-            catch(NullReferenceException) 
-            {
-                MessageBox.Show("Пожалуйста,заполните обязательные формы");
-            }
-           
-        }
-
         private void Cancel_button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

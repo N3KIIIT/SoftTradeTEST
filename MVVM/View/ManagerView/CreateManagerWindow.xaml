@@ -30,9 +30,9 @@
             <RowDefinition Height="17*"/>
         </Grid.RowDefinitions>
         <Label x:Name="Name_label" Content="Name:*" HorizontalAlignment="Left" Margin="32,74,0,0" VerticalAlignment="Top" Foreground="#FFE8E8E8" FontSize="24"/>
-        <TextBox x:Name="Name_textBox" HorizontalAlignment="Left" Margin="116,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" FontSize="24" Background="#FF616161" Foreground="White"/>
-        <Button x:Name="Create_button" Content="Create" Click="Create_button_Click" Margin="37,18,236,48" FontSize="24" Grid.Row="1"/>
-        <Button x:Name="Cancel_button" Content="Cancel" Click="Cancel_button_Click" Margin="223,18,50,48" FontSize="24" Grid.Row="1"/>
+        <TextBox x:Name="Name_textBox" Text="{Binding Name}" HorizontalAlignment="Left" Margin="116,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" FontSize="24" Background="#FF616161" Foreground="White"/>
+        <Button x:Name="Create_button" Command="{Binding CreateManagerCommand}" Content="Create" Margin="37,18,236,48" FontSize="24" Grid.Row="1"/>
+        <Button x:Name="Cancel_button" Command="{Binding Cancel}" Content="Cancel" Click="Cancel_button_Click" Margin="223,18,50,48" FontSize="24" Grid.Row="1"/>
         <Label x:Name="lable" Content="'*' - обязательные поля" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
         <Label Content="Create new Manager" HorizontalAlignment="Left" Margin="90,27,0,0" VerticalAlignment="Top" Foreground="White" FontSize="30"/>
     </Grid>

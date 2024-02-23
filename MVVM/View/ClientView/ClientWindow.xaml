@@ -53,31 +53,28 @@
                 </StackPanel>
             </Grid>
         </Border>
-        <Grid>
+        <Grid Width="128">
             <Grid.RowDefinitions>
                 <RowDefinition Height="88*"/>
                 <RowDefinition Height="94*"/>
                 <RowDefinition Height="107*"/>
                 <RowDefinition Height="103*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="Refresh_button" Content="Refresh" Margin="10,10,10,34" Click="Refresh_button_Click"/>
-            <ComboBox x:Name="Status_comboBox" Margin="10,26,10,41" Grid.Row="1"/>
+            <Button x:Name="Refresh_button" Command="{Binding GetAllClientsCommand}" Content="Refresh" Margin="10,10,10,34" Click="Refresh_button_Click"/>
+            <ComboBox x:Name="Status_comboBox" SelectionChanged="Status_comboBox_SelectionChanged" SelectedValue="{Binding Status}" Margin="10,26,10,41" Grid.Row="1"/>
             <Label x:Name="Status_textBox" Content="Status" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top" Foreground="WhiteSmoke" Height="26" Width="42" Grid.RowSpan="2"/>
-            <Button x:Name="SortByStatus_button" Content="Sort by status" Margin="10,58,10,8" Click="SortByStatus_button_Click" Grid.Row="1"/>
-            <ComboBox x:Name="Manager_comboBox" Margin="10,31,10,49" Grid.Row="2"/>
+            <ComboBox x:Name="Manager_comboBox" Margin="10,31,10,49" Grid.Row="2" SelectionChanged="Manager_comboBox_SelectionChanged"/>
             <Label x:Name="Status_textBox_Copy" Content="Managers" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Foreground="WhiteSmoke" Height="26" Width="62" Grid.Row="2"/>
-            <Button x:Name="SortByManagers_button" Content="Sort by managers" Margin="10,63,10,15" Grid.Row="2" Click="SortByManagers_button_Click"/>
-            <ComboBox x:Name="Product_comboBox" Margin="10,34,10,42" Grid.Row="3"/>
+            <ComboBox x:Name="Product_comboBox" Margin="10,34,10,42" Grid.Row="3" SelectionChanged="Product_comboBox_SelectionChanged"/>
             <Label x:Name="Status_textBox_Copy1" Content="Producrs" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Foreground="WhiteSmoke" Height="26" Width="57" Grid.Row="3"/>
-            <Button x:Name="SortByProducts_button" Content="Sort by products" Margin="10,66,10,10" Grid.Row="3" Click="SortByProducts_button_Click"/>
         </Grid >
 
 
-        <DataGrid x:Name="DataGrid" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" DockPanel.Dock="Top" Height="281" Width="676" Background="#FF252525" 
-              IsReadOnly="True" SelectedCellsChanged="DataGrid_SelectedCellsChanged"/>
-        <Button x:Name="Create_button" Content="Create" Width="134" Height="38" HorizontalAlignment="Left" Margin="5,0,0,0" Click="Create_button_Click"/>
-        <Button x:Name="Edit_button" Content="Edit" Width="134" Height="38" HorizontalAlignment="Right" Margin="225,0,5,0" Click="Edit_button_Click" VerticalAlignment="Center"/>
-        <Button x:Name="Delete_button" Content="Delete" Width="134" Height="38" HorizontalAlignment="Right" Margin="5,0,5,0" Click="Delete_button_Click"/>
+        <DataGrid x:Name="DataGrid" ItemsSource="{Binding Clients}" SelectedItem="{Binding SelectedClient}" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False" DockPanel.Dock="Top" Height="281" Width="657" Background="#FF252525" 
+              IsReadOnly="True"/>
+        <Button x:Name="Create_button" Command="{Binding CreateClientWindowCommand}" Content="Create" Width="134" Height="38" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+        <Button x:Name="Edit_button" Command="{Binding EditClientWindowCommand}" Content="Edit" Width="134" Height="38" HorizontalAlignment="Right" Margin="225,0,5,0" VerticalAlignment="Center"/>
+        <Button x:Name="Delete_button" Command="{Binding DeleteClientCommand}" Content="Delete" Width="134" Height="38" HorizontalAlignment="Right" Margin="5,0,5,0"/>
 
     </DockPanel>
 </Window>

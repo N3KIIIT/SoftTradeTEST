@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using SoftTradeTEST.DB;
-using SoftTradeTEST.Models;
+using SoftTradeTEST.MVVM.Models;
 using SoftTradeTEST.Repository.IRepository;
 using System;
 using System.Collections.Generic;

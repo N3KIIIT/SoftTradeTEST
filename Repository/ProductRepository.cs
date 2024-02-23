@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using SoftTradeTEST.DB;
-using SoftTradeTEST.Models;
-using SoftTradeTEST.Models.Enum;
+using SoftTradeTEST.MVVM.Models;
+using SoftTradeTEST.MVVM.Models.Enum;
 using SoftTradeTEST.Repository.IRepository;
 namespace SoftTradeTEST.Repository
 {
@@ -45,7 +45,7 @@ namespace SoftTradeTEST.Repository
                     {
                         product.ProductId = (int)reader.GetValue(0);
                         product.Name = reader.GetValue(1).ToString();
-                        product.Type = (Models.Enum.Type)reader.GetValue(2);
+                        product.Type = (MVVM.Models.Enum.Type)reader.GetValue(2);
                         product.Period = (SubscriptionPeriod)reader.GetValue(3);
                     }
 
@@ -76,8 +76,8 @@ namespace SoftTradeTEST.Repository
                         {
                             ProductId = (int)reader.GetValue(0),
                             Name = reader.GetValue(1).ToString(),
-                            Type = (Models.Enum.Type)reader.GetValue(2),
-                            Period = (Models.Enum.SubscriptionPeriod)reader.GetValue(3)
+                            Type = (MVVM.Models.Enum.Type)reader.GetValue(2),
+                            Period = (SubscriptionPeriod)reader.GetValue(3)
                         };
                         productList.Add(product);
                     }

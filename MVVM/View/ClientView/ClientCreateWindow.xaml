@@ -25,16 +25,16 @@ ResizeMode="CanResize">
 
     <Grid Background="#FF1E1E1E"
    Margin="7">
-        <Label x:Name="Name_label" Content="Name:*" HorizontalAlignment="Left" Margin="27,74,0,0" VerticalAlignment="Top" Foreground="#FFE8E8E8" FontSize="24"/>
-        <TextBox x:Name="Name_textBox" HorizontalAlignment="Left" Margin="116,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" FontSize="24" Background="#FF616161" Foreground="White"/>
-        <Button x:Name="Create_button" Content="Create" Click="Create_button_Click" Margin="37,319,236,48" FontSize="24"/>
-        <Button x:Name="Cancel_button" Content="Cancel" Click="Cancel_button_Click" Margin="223,319,50,48" FontSize="24"/>
-        <ComboBox x:Name="Status_comboBox" HorizontalAlignment="Left" Margin="116,135,0,0" VerticalAlignment="Top" Width="270" Height="34"/>
+        <Label x:Name="Name_label"  Content="Name:*" HorizontalAlignment="Left" Margin="27,74,0,0" VerticalAlignment="Top" Foreground="#FFE8E8E8" FontSize="24"/>
+        <TextBox x:Name="Name_textBox" Text="{Binding Name}" HorizontalAlignment="Left" Margin="116,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" FontSize="24" Background="#FF616161" Foreground="White"/>
+        <Button x:Name="Create_button" Command="{Binding CreateClientCommand}" Content="Create" Margin="37,319,236,48" FontSize="24"/>
+        <Button x:Name="Cancel_button"  Content="Cancel" Click="Cancel_button_Click" Margin="223,319,50,48" FontSize="24"/>
+        <ComboBox x:Name="Status_comboBox" SelectedValue="{Binding Status}" HorizontalAlignment="Left" Margin="116,135,0,0" VerticalAlignment="Top" Width="270" Height="34"/>
         <Label x:Name="Status_label" Content="Status:*" HorizontalAlignment="Left" Margin="26,127,0,0" VerticalAlignment="Top" Foreground="#FFE8E8E8" FontSize="24"/>
-        <ComboBox x:Name="Manager_comboBox" HorizontalAlignment="Left" Margin="116,189,0,0" VerticalAlignment="Top" Width="270" Height="34"/>
+        <ComboBox x:Name="Manager_comboBox" SelectedValue="{Binding Manager}" HorizontalAlignment="Left" Margin="116,189,0,0" VerticalAlignment="Top" Width="270" Height="34"/>
         <Label x:Name="Manager_label" Content="Manager:*" HorizontalAlignment="Left" Margin="0,185,0,0" VerticalAlignment="Top" Foreground="#FFE8E8E8" FontSize="24" RenderTransformOrigin="0.492,0.668"/>
         <Label x:Name="Product_label" Content="Product:*" HorizontalAlignment="Left" Margin="6,238,0,0" VerticalAlignment="Top" Foreground="#FFE8E8E8" FontSize="24" RenderTransformOrigin="0.492,0.668"/>
-        <ComboBox x:Name="Product_comboBox" HorizontalAlignment="Left" Margin="116,242,0,0" VerticalAlignment="Top" Width="270" Height="34"/>
+        <ComboBox x:Name="Product_comboBox" SelectedValue="{Binding Product}" HorizontalAlignment="Left" Margin="116,242,0,0" VerticalAlignment="Top" Width="270" Height="34"/>
         <Label x:Name="lable" Content="'*' - обязательные поля" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
         <Label Content="Create new Client" HorizontalAlignment="Left" Margin="130,27,0,0" VerticalAlignment="Top" Foreground="White" FontSize="30"/>
     </Grid>

@@ -1,4 +1,4 @@
-﻿using SoftTradeTEST.Models;
+﻿using SoftTradeTEST.MVVM.Models;
 
 
 namespace SoftTradeTEST.Repository.IRepository

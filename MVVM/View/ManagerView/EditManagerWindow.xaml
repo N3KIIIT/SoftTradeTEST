@@ -30,9 +30,9 @@ ResizeMode="CanResize">
             <RowDefinition Height="23*"/>
         </Grid.RowDefinitions>
         <Label x:Name="Name_label" Content="Name:*" HorizontalAlignment="Left" Margin="30,74,0,0" VerticalAlignment="Top" Foreground="#FFE8E8E8" FontSize="24"/>
-        <TextBox x:Name="Name_textBox" HorizontalAlignment="Left" Margin="116,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" FontSize="24" Background="#FF616161" Foreground="White"/>
-        <Button x:Name="Update_button" Content="Update" Click="Update_button_Click" Margin="37,37,236,48" FontSize="24" Grid.Row="1"/>
-        <Button x:Name="Cancel_button" Content="Cancel" Click="Cancel_button_Click" Margin="223,37,50,48" FontSize="24" Grid.Row="1"/>
+        <TextBox x:Name="Name_textBox" Text="{Binding Name}" HorizontalAlignment="Left" Margin="116,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" FontSize="24" Background="#FF616161" Foreground="White"/>
+        <Button x:Name="Update_button" CommandParameter="{Binding Path}" Command="{Binding EditManagerCommand}" Content="Update" Margin="37,37,236,48" FontSize="24" Grid.Row="1"/>
+        <Button x:Name="Cancel_button" Content="Cancel" Margin="223,37,50,48" FontSize="24" Grid.Row="1" Click="Cancel_button_Click"/>
         <Label x:Name="lable" Content="'*' - обязательные поля" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
         <Label Content="Edit Manager" HorizontalAlignment="Left" Margin="158,32,0,0" VerticalAlignment="Top" Foreground="White" FontSize="30"/>
     </Grid>

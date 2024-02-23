@@ -1,5 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using SoftTradeTEST.Models;
+using SoftTradeTEST.MVVM.Models;
+using SoftTradeTEST.MVVM.ViewModel.ProductVM;
 using SoftTradeTEST.Repository;
 using SoftTradeTEST.Repository.IRepository;
 using System;
@@ -23,19 +24,12 @@ namespace SoftTradeTEST.MVVM.View.ProductView
     /// </summary>
     public partial class ProductEditWindow : Window
     {
-        private IUnit _unit = new Unit(new DB.DbConnection());
-        private Product _selectedProduct = new Product();
-        public ProductEditWindow()
-        {
-            InitializeComponent();
-            
-        }
         public ProductEditWindow(int id)
         {
             InitializeComponent();
-            _selectedProduct = _unit.Product.Get(id);
 
-            Name_textBox.Text = _selectedProduct.Name;
+            EditProductViewModel editProductViewModel = new EditProductViewModel(id);
+            this.DataContext = editProductViewModel;
 
             Type_comboBox.ItemsSource = new object[]
            {
@@ -52,38 +46,6 @@ namespace SoftTradeTEST.MVVM.View.ProductView
         private void Cancel_button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private void Update_button_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (Name_textBox.Text.IsNullOrEmpty() || Type_comboBox.SelectedValue.ToString().IsNullOrEmpty())
-                    throw new NullReferenceException();
-                if ((Models.Enum.Type)Type_comboBox.SelectedValue == Models.Enum.Type.Subscription && Period_comboBox.SelectedValue.ToString().IsNullOrEmpty())
-                    throw new NullReferenceException();
-
-                if (!Name_textBox.Text.IsNullOrEmpty() && (Models.Enum.Type)Type_comboBox.SelectedValue == Models.Enum.Type.Permanent)
-                {
-                    _selectedProduct.Name = Name_textBox.Text;
-                    _selectedProduct.Type = Models.Enum.Type.Permanent;
-                    _selectedProduct.Period = 0;
-                    _unit.Product.Update(_selectedProduct);
-                    this.Close();
-                }
-                if (!Name_textBox.Text.IsNullOrEmpty() && (Models.Enum.Type)Type_comboBox.SelectedValue == Models.Enum.Type.Subscription)
-                {
-                    _selectedProduct.Name = Name_textBox.Text;
-                    _selectedProduct.Type = Models.Enum.Type.Subscription;
-                    _selectedProduct.Period = (Models.Enum.SubscriptionPeriod)Period_comboBox.SelectedValue;
-                    _unit.Product.Update(_selectedProduct);
-                    this.Close();
-                }
-            }
-            catch (NullReferenceException)
-            {
-                MessageBox.Show("Пожалуйста,заполните обязательные формы");
-            }
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿
-namespace SoftTradeTEST.Models.Enum
+namespace SoftTradeTEST.MVVM.Models.Enum
 {
     internal enum Type
     {

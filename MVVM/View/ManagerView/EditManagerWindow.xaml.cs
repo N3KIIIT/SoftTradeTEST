@@ -1,5 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using SoftTradeTEST.Models;
+using SoftTradeTEST.MVVM.Models;
+using SoftTradeTEST.MVVM.ViewModel.ManagerVM;
 using SoftTradeTEST.Repository;
 using SoftTradeTEST.Repository.IRepository;
 using System;
@@ -23,35 +24,15 @@ namespace SoftTradeTEST.MVVM.View
     /// </summary>
     public partial class EditManagerWindow : Window
     {
-        private Manager _selectedManager = new Manager();
         private IUnit _unit = new Unit(new DB.DbConnection());
-        public EditManagerWindow()
-        {
-            InitializeComponent();
-        }
         public EditManagerWindow(int id)
         {
             InitializeComponent();
-            _selectedManager = _unit.Manager.Get(id);
-            Name_textBox.Text = _selectedManager.Name;
-        }
 
-        private void Update_button_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (Name_textBox.Text.IsNullOrEmpty())
-                    throw new NullReferenceException();
+            EditManagerViewModel editManagerWindow = new EditManagerViewModel(id);
+            this.DataContext = editManagerWindow;
 
-                _selectedManager.Name = Name_textBox.Text;
-                _unit.Manager.Update(_selectedManager);
-                this.Close();
-
-            }
-            catch (NullReferenceException)
-            {
-                MessageBox.Show("Пожалуйста,заполните обязательные формы");
-            }
+            Name_textBox.Text = _unit.Manager.Get(id).Name;
         }
 
         private void Cancel_button_Click(object sender, RoutedEventArgs e)

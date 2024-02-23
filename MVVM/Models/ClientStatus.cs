@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoftTradeTEST.Models
+namespace SoftTradeTEST.MVVM.Models
+
 {
     internal class ClientStatus
     {

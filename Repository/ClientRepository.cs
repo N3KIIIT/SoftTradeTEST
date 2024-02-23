@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
 using SoftTradeTEST.DB;
-using SoftTradeTEST.Models;
+using SoftTradeTEST.MVVM.Models;
 using SoftTradeTEST.Repository.IRepository;
 
 

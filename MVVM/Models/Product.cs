@@ -1,7 +1,9 @@
-﻿using SoftTradeTEST.Models.Enum;
-using Type = SoftTradeTEST.Models.Enum.Type;
+﻿using SoftTradeTEST.MVVM.Models.Enum;
 
-namespace SoftTradeTEST.Models
+using Type = SoftTradeTEST.MVVM.Models.Enum.Type;
+
+namespace SoftTradeTEST.MVVM.Models
+
 {
     internal class Product
     {
